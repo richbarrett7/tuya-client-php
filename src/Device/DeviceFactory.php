@@ -4,7 +4,7 @@ namespace Inverse\TuyaClient\Device;
 
 class DeviceFactory
 {
-    public function fromArray(array $data): AbstractDevice
+    public function fromArray(array $data)
     {
         $device = null;
         switch ($data['dev_type']) {
@@ -20,6 +20,11 @@ class DeviceFactory
                 $device->setIsOnline($data['data']['online']);
                 $device->setState($data['data']['state']);
                 break;
+            default:
+              
+              false; // for unsupported devices
+
+            break;
         }
 
         return $device;

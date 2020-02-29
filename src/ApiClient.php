@@ -45,12 +45,13 @@ class ApiClient
     public function discoverDevices(): array
     {
         $response = $this->request('Discovery', 'discovery');
-
+        
         $devices = [];
         foreach ($response['payload']['devices'] as $device) {
-            $devices[] = $this->deviceFactory->fromArray($device);
+          $device_obj = $this->deviceFactory->fromArray($device);
+          if($device_obj) $devices[]=$device_obj;
         }
-
+        
         return $devices;
     }
 
